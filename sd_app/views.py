@@ -8,10 +8,6 @@ class LoginPageView(TemplateView):
 class HomePageView(TemplateView):
     template_name = 'sd_app/home.html'
 
-def loginPage(request):
-    '''Prompt user to login, link to registration page'''
-    return render(request, 'sd_app/login.html')
-
 def registerPage(request):
     '''Prompt user to register, after registering redirect to login page'''
     return render(request, 'register.html')
