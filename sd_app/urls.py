@@ -1,7 +1,8 @@
 # URL mappings for the application
 from django.urls import path
-from .views import homePageView
+from .views import LoginPageView, HomePageView
 
 urlpatterns = [
-    path('', homePageView, name='home')
+    path('', HomePageView.as_view(), name='home'),
+    path('login/', LoginPageView.as_view(), name='login'),
     ]

@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 
+class LoginPageView(TemplateView):
+    template_name = 'sd_app/login.html'
+
+class HomePageView(TemplateView):
+    template_name = 'sd_app/home.html'
 
 def loginPage(request):
     '''Prompt user to login, link to registration page'''
-    return render(request, 'login.html')
+    return render(request, 'sd_app/login.html')
 
 def registerPage(request):
     '''Prompt user to register, after registering redirect to login page'''
@@ -15,7 +21,3 @@ def buyPage(request):
     Display total price of transaction.
     Link to logout.'''
     return render(request, 'buy.html')
-
-def homePageView(request):
-    '''Display home page, link to login page'''
-    return HttpResponse('Hello, world. You are at the home page.')
