@@ -14,4 +14,4 @@ class Transaction(models.Model):
     # Date and time of transaction
     date = models.DateTimeField()
     # User who made the transaction
-    customer_id = models.ForeignKey(settings.AUTH_USER_MODEL)
+    customer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
