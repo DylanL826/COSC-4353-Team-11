@@ -9,7 +9,7 @@ class HomePageView(TemplateView):
     template_name = 'sd_app/home.html'
     
 class ProfilePageView(TemplateView):
-    template_name = 'profile.html'
+    template_name = 'sd_app/profile.html'
 
 def registerPage(request):
     '''Prompt user to register, after registering redirect to login page'''
