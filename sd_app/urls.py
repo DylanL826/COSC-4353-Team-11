@@ -5,5 +5,5 @@ from .views import LoginPageView, HomePageView
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('login/', LoginPageView.as_view(), name='login'),
-     path('profile/', ProfilePageView.as_view(), name = 'profile'),
+    path('profile/', ProfilePageView.as_view(), name = 'profile'),
     ]
