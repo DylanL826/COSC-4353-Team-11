@@ -9,6 +9,14 @@
     <h4>Suggested Price: <input type="text"></h4>
     <input type="submit" value="Calculate the Price">
     <h4>Total Amount Due: <input type="text"></h4>
+    
+    <p>
+        <a href="{% url 'profile' %}">Profile Page</a>
+    </p>
+
+    <p>
+        <a href="{% url 'history' %}">History Page</a>
+    </p>
 
     <a href="{% url 'logout' %}">Logout</a>
 {% else %}
