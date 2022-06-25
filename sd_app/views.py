@@ -20,3 +20,12 @@ def buyPage(request):
     Display total price of transaction.
     Link to logout.'''
     return render(request, 'buy.html')
+
+def buyPageCalculation(request):
+    '''Calculate total price of transaction'''
+    if request.method == 'POST':
+        quantity = request.POST['quantity']
+        price = request.POST['price']
+        total = float(quantity) * float(price)
+        return render(request, 'buy.html', {'total': total})
+    return render(request, 'buy_calculation.html')
