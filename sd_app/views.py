@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 
@@ -27,5 +27,5 @@ def buyPageCalculation(request):
         quantity = request.POST['quantity']
         price = request.POST['price']
         total = float(quantity) * float(price)
-        return render(request, 'buy.html', {'total': total})
-    return render(request, 'buy_calculation.html')
+        request.session['total'] = total # store total in session
+        return redirect(request, 'buy.html', {'total': total}) # 

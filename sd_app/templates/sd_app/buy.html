@@ -2,11 +2,13 @@
     
     {% block content %}
     <body>
-        <p>Purchase Information</p>
-        <h4>Quantity (gal): <input type="text"></h4>
-        <h4>Address : <input type="text"></h4>
-        <h4>Delivery Date: <input type="text"></h4>        
-        <input type="submit" value="Submit">
+        <form action="{% url 'buy' %}">
+            <p>Purchuse Form</p>
+            <h4>Quantity (gal): <input type="text"></h4>
+            <h4>Address : <input type="text"></h4>
+            <h4>Delivery Date: <input type="text"></h4>        
+            <input type="submit" value="Submit">
+        </form>
     </body>
         
     {% endblock content %}
