@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %} About Bloggit {% endblock title %}
+{% block content %}
+<!-- Add header -->
+{% include "header.html" %}
+<!-- end header -->
+<!-- Adding blogs content -->
+<section>
+  <div class="about">
+    <ul>
+      <li>
+        FuelFast is a project for software development with Dr. Singh.
+      </li>
+      <li>Our motto is get fuel fast!!</li>
+    </ul>
+  </div>
+</section>
+<section class="imageCollage">
+  <img src="https://placeimg.com/300/300/nature" alt="nature blogs" />
+  <img src="https://placeimg.com/300/300/tech" alt="technical blogs" />
+  <img src="https://placeimg.com/300/300/people" alt="health blogs" />
+  <img src="https://placeimg.com/300/300/arch" alt="fashion blogs" />
+  <img src="https://placeimg.com/300/300/tech" alt="technical blogs" />
+  <img src="https://placeimg.com/300/300/nature" alt="nature blogs" />
+  <img src="https://placeimg.com/300/300/arch" alt="fashion blogs" />
+  <img src="https://placeimg.com/300/300/people" alt="health blogs" />
+</section>
+<!-- Ending blogs content -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+{% endblock content %}
