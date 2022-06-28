@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+{% extends "sd_app/base.html" %}
 
+{% block content %}
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
-    <p>profile here</p>
-    <h4>Full Name: <input type="text"></h4>
-    <h4>Address1: <input type="text"></h4>
-    <h4>Address2: <input type="text"></h4>
-    <h4>City: <input type="text"></h4>
-    <h4>State: <input type="text"></h4>
-    <h4>Zipcode: <input type="text"></h4>
-    <input type="submit" value="Submit">
+    <h2>Profile</h2>    
+    <h3>{{ user.username }}</h3>
+    <form action="{% url 'sd_app:profile' %}" method="POST">
+        {% csrf_token %}        
+        {{ profile_form.as_p }}
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
 </body>
 </html>
+{% endblock %}
