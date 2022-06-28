@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from sd_app.models import UserProfile
+from sd_app.models import UserProfile, Transaction
 
 
 
@@ -26,3 +26,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile 
         fields = ('full_name', 'address', 'city', 'state', 'zip_code')      
+
+class BuyForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ('amount', 'location', 'date', 'delivery_date')

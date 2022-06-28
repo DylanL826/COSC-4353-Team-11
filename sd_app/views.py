@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .forms import NewUserForm, ProfileForm
+from .forms import NewUserForm, ProfileForm, BuyForm
 
 
 class LoginPageView(TemplateView):
@@ -57,12 +57,24 @@ def registerPage(request):
     
     return render (request=request, template_name="registration/register.html", context={"register_form":form})
 
-
+@login_required
 def buyPage(request):
     '''Prompt user to buy, after buying refresh page.
     Display total price of transaction.
     Link to logout.'''
-    return render(request, 'buy.html')
+    if request.method != 'POST': 
+        print("\t\tbuyPage: GET request received\n")
+        form = BuyForm()
+    else: # POST
+        print("\t\tbuyPage: POST request received\n")
+        form = BuyForm(data=request.POST)
+        if form.is_valid():
+            print("\t\tbuyPage: Form is valid\n")
+            form.save()
+            return redirect('sd_app:buy')
+        print("\t\tbuyPage: Form is invalid\n")
+    context = {'buy_form': form}
+    return render(request, 'sd_app/buy.html', context)
 
 def buyPageCalculation(request):
     '''Calculate total price of transaction'''

@@ -1,14 +1,13 @@
-{% extends "base.html" %}
+{% extends "sd_app/base.html" %}
     
     {% block content %}
-    <body>
-        <!-- Display price/gal -->
-        <form action="{% url 'buy' %}">
-            <p>Purchuse Form</p>
-            <h4>Quantity (gal): <input type="text"></h4>
-            <h4>Address : <input type="text"></h4>
-            <h4>Delivery Date: <input type="text"></h4>        
-            <input type="submit" value="Submit">
+    <h2> Transaction Form</h2>
+    <body>        
+        <form method="POST" action="{% url 'sd_app:buy' %}">
+            {% csrf_token %}
+            {{ buy_form.as_p }}
+            <button type="submit">Calculate</button>
+                                    
         </form>
     </body>
         

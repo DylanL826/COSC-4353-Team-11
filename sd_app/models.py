@@ -8,17 +8,20 @@ from django.dispatch import receiver
 class Transaction(models.Model):
     """
     Transaction model
-    """
-    # Transaction ID
-    transaction_id = models.AutoField(primary_key=True)
-    # Amount purchased
+    """        
+    # Amount being purchased
     amount = models.FloatField()
     # Location where transaction occurred, true if in state, false if out of state.
-    location = models.BooleanField()
+    location = models.CharField(max_length=100)
     # Date and time of transaction
     date = models.DateTimeField()
+    # Date and time of desired delivery
+    delivery_date = models.DateTimeField()
     # User who made the transaction
-    customer_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.date) + ": " + str(self.amount) + " gal, at " + str(self.location) + " on " + str(self.delivery_date)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
