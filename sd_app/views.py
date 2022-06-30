@@ -91,3 +91,23 @@ def buyPageCalculation(request):
         total = float(quantity) * float(price)
         request.session['total'] = total # store total in session
         return redirect(request, 'buy.html', {'total': total})
+
+#def transactionPage(request):
+
+'''def priceModel(location, history, gallons_requested):
+    if location=="TX":
+        location_rate = 0.02
+    else:
+        location_rate = 0.04
+    if history:
+        history_rate = 0.01
+    else:
+        history_rate = 0
+    if gallons_requested > 1000:
+        gallons_requested_rate = 0.02
+    else:
+        gallons_requested_rate = 0.03
+    company_profit_rate = 0.1
+    margin = (location_rate - history_rate + gallons_requested_rate + company_profit_rate) * 1.50
+    price = margin + 1.50
+    return price'''
