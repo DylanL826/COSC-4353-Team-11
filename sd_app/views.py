@@ -8,6 +8,8 @@ from django.contrib import messages
 
 from .forms import NewUserForm, ProfileForm, BuyForm
 
+from .models import Transaction
+
 
 class LoginPageView(TemplateView):
     template_name = 'sd_app/login.html'
@@ -18,7 +20,8 @@ class HomePageView(TemplateView):
 
 @login_required
 def profilePage(request):
-    '''Display user profile information and allow them to update profile information'''
+    ''' Display user profile information and allow them to update profile information.
+        Display transaction history of User.'''    
     if request.method == 'POST': # Form has been submitted
         print("\t\tPOST request received\n")
         #user_form = NewUserForm(request.POST, instance=request.user)
@@ -33,7 +36,8 @@ def profilePage(request):
     else: # GET request, display current information
         print("\t\tGET request received\n") 
         profile_form = ProfileForm(instance=request.user.userprofile)
-    context = {'profile_form': profile_form}
+    purchases = Transaction.objects.filter(user=request.user)
+    context = {'profile_form': profile_form, 'purchases': purchases}    
     return render(request, 'sd_app/profile.html', context)    
 
 def registerPage(request):
@@ -70,7 +74,10 @@ def buyPage(request):
         form = BuyForm(data=request.POST)
         if form.is_valid():
             print("\t\tbuyPage: Form is valid\n")
-            form.save()
+            #form.initial['user_id'] = request.user.id
+            new_purchase = form.save(commit=False)
+            new_purchase.user = request.user
+            new_purchase.save()
             return redirect('sd_app:buy')
         print("\t\tbuyPage: Form is invalid\n")
     context = {'buy_form': form}
