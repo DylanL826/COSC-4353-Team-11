@@ -13,16 +13,14 @@ class Transaction(models.Model):
     # Amount being purchased
     amount = models.FloatField()
     # Location where transaction occurred, true if in state, false if out of state.
-    location = models.CharField(max_length=100)
-    # Date and time of transaction
-    date = models.DateField(default=datetime.date.today)
+    location = models.CharField(max_length=100)    
     # Date and time of desired delivery
-    delivery_date = models.DateField(default = datetime.date.today)
+    delivery_date = models.CharField(max_length=15)
     # User who made the transaction
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.date) + ": " + str(self.amount) + " gal, at " + str(self.location) + " on " + str(self.delivery_date)
+        return "Amount: " + str(self.amount) + " gal. Location: at " + str(self.location) + ". Delivery Date: " + str(self.delivery_date)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

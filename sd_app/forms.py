@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 from .models import UserProfile, Transaction
 
-
+# Widget to display a dropdown menu of states for transaction form.
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 # Creates a form for the user to register a new user account.
 class NewUserForm(UserCreationForm):
@@ -30,4 +32,5 @@ class ProfileForm(forms.ModelForm):
 class BuyForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ('amount', 'location', 'date', 'delivery_date')
+        fields = ('amount', 'location', 'delivery_date')
+        widgets = {'delivery_date': DateInput()}
