@@ -15,9 +15,9 @@ class Transaction(models.Model):
     # Location where transaction occurred, true if in state, false if out of state.
     location = models.CharField(max_length=100)
     # Date and time of transaction
-    date = models.CharField(max_length=100, default="Today")
+    date = models.DateField(default=datetime.date.today)
     # Date and time of desired delivery
-    delivery_date = models.CharField(max_length=100, default="Never")
+    delivery_date = models.DateField(default = datetime.date.today)
     # User who made the transaction
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
