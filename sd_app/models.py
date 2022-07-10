@@ -18,8 +18,8 @@ class Transaction(models.Model):
     # Date and time of desired delivery
     delivery_date = models.CharField(max_length=15)
     # User who made the transaction
-    suggested_price = models.CharField(max_length=5, default='$4.56')
-    total_amount_due = models.CharField(max_length=6, default='$1,234')
+    suggested_price = models.DecimalField(max_digits=10, decimal_places=2, default='4.56')
+    total_amount_due = models.DecimalField(max_digits=10, decimal_places=2, default='1234.00')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
