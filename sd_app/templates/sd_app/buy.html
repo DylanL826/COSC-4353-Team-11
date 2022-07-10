@@ -6,7 +6,7 @@
         <form method="POST" action="{% url 'sd_app:buy' %}">
             {% csrf_token %}
             {{ buy_form.as_p }}
-            <button type="submit">Submit Order</button>
+            <button type="submit">Submit</button>
 
         </form>
     </body>

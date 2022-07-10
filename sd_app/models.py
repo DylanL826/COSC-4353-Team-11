@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.validators import MinLengthValidator
 import datetime
 
 
@@ -13,7 +14,7 @@ class Transaction(models.Model):
     # Amount being purchased
     gallons_requested = models.FloatField()
     # Location where transaction occurred, true if in state, false if out of state.
-    location = models.CharField(max_length=100)    
+    delivery_address = models.CharField(max_length=35, default='PROFILE ADDRESS')
     # Date and time of desired delivery
     delivery_date = models.CharField(max_length=15)
     # User who made the transaction
@@ -22,7 +23,7 @@ class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Gallons requested: " + str(self.gallons_requested) + " gal. Location: " + str(self.location) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
+        return "Gallons requested: " + str(self.gallons_requested) + " gal. Delivery Address: " + str(self.delivery_address) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
 
 STATE_CHOICES = (
     ('al','AL'),
@@ -84,7 +85,7 @@ class UserProfile(models.Model):
     address_2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=2, choices=STATE_CHOICES)
-    zipcode = models.CharField(max_length=5)
+    zipcode = models.CharField(max_length=9, validators=[MinLengthValidator(5)])
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

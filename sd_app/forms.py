@@ -32,5 +32,5 @@ class ProfileForm(forms.ModelForm):
 class BuyForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ('gallons_requested', 'location', 'delivery_date', 'suggested_price', 'total_amount_due')
+        fields = ('gallons_requested', 'delivery_address', 'delivery_date', 'suggested_price', 'total_amount_due')
         widgets = {'delivery_date': DateInput()}
