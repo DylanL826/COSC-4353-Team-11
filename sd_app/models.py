@@ -17,10 +17,12 @@ class Transaction(models.Model):
     # Date and time of desired delivery
     delivery_date = models.CharField(max_length=15)
     # User who made the transaction
+    suggested_price = models.CharField(max_length=5, default='$4.57')
+    total_amount_due = models.CharField(max_length=6, default='$1,234')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Amount: " + str(self.amount) + " gal. Location: at " + str(self.location) + ". Delivery Date: " + str(self.delivery_date)
+        return "Gallons requested: " + str(self.gallons_requested) + " gal. Location: " + str(self.location) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
 
 STATE_CHOICES = (
     ('al','AL'),
