@@ -19,10 +19,6 @@ INSTALL DEPENDENCIES
 
 python3 -m pip install -r requirements.txt
 
-CHANGE DIRECTORIES
-
-cd bloggitt
-
 MAKEMIGRATIONS
 
 python3 manage.py makemigrations
