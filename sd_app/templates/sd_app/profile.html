@@ -13,7 +13,7 @@
     <form action="{% url 'sd_app:profile' %}" method="POST">
         {% csrf_token %}        
         {{ profile_form.as_p }}
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save / Update Profile</button>
     </form>
     <br>
     <h2>Fuel Quote History</h2>

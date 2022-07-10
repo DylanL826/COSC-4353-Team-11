@@ -1,9 +1,9 @@
-<h1>ABC Fuel Company Dashboard</h1>
+<h1>ABC Fuel Company Home Page</h1>
 
 {% if user.is_authenticated %}
     <p>Hello {{user.username}}</p>
     <p>
-        <a href="{% url 'sd_app:profile' %}">Profile / Fuel Quote History</a>
+        <a href="{% url 'sd_app:profile' %}">Profile and Fuel Quote History</a>
     </br>
     </br>
         <a href="{% url 'sd_app:buy' %}">Fuel Quote Form</a>

@@ -79,12 +79,12 @@ STATE_CHOICES = (
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=50, blank=True)
-    address_1 = models.CharField(max_length=100, blank=True)
+    full_name = models.CharField(max_length=50)
+    address_1 = models.CharField(max_length=100)
     address_2 = models.CharField(max_length=100, blank=True)
-    city = models.CharField(max_length=100, blank=True)
-    state = models.CharField(max_length=2, choices=STATE_CHOICES, blank=True)
-    zipcode = models.CharField(max_length=9, blank=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, choices=STATE_CHOICES)
+    zipcode = models.CharField(max_length=5)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
