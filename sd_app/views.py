@@ -83,7 +83,7 @@ def buyPage(request):
     context = {'buy_form': form}
     return render(request, 'sd_app/buy.html', context)
 
-def buyPageCalculation(request):
+#def buyPageCalculation(request):
     '''Calculate total price of transaction'''
     if request.method == 'POST':
         quantity = request.POST['quantity']
