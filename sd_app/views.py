@@ -10,6 +10,8 @@ from .forms import NewUserForm, ProfileForm, BuyForm
 
 from .models import Transaction
 
+class PricingModule:
+    pass
 
 class LoginPageView(TemplateView):
     template_name = 'sd_app/login.html'
