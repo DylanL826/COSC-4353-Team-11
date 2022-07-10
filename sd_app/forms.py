@@ -27,7 +27,7 @@ class NewUserForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile 
-        fields = ('full_name', 'address_line_1', 'address_line_2', 'city', 'state', 'zip_code')      
+        fields = ('full_name', 'address_1', 'address_2', 'city', 'state', 'zip_code')      
 
 class BuyForm(forms.ModelForm):
     class Meta:

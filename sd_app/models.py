@@ -78,8 +78,8 @@ STATE_CHOICES = (
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, blank=True)
-    address_line_1 = models.CharField(max_length=100, blank=True)
-    address_line_2 = models.CharField(max_length=100, blank=True)
+    address_1 = models.CharField(max_length=100, blank=True)
+    address_2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=2, choices=STATE_CHOICES, blank=True)
     zip_code = models.CharField(max_length=9, blank=True)
