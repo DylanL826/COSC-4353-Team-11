@@ -5,7 +5,7 @@ Steps to clone and run locally:
 
 CLONE AND CHECKOUT
 
-git clone -b main *url*
+git clone *url*
 
 CREATE VIRTUAL ENVIRONEMENT
 
