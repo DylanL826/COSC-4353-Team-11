@@ -34,3 +34,18 @@ python3 manage.py createsuperuser
 RUN
 
 python3 manage.py runserver
+
+---
+
+TESTING INSTRUCTIONS
+
+Coverage instructions:
+
+Pip3 install coverage
+
+coverage --version
+
+coverage run manage.py test
+
+coverage report
+
