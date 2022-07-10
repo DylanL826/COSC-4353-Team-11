@@ -30,6 +30,11 @@ class ProfileForm(forms.ModelForm):
         fields = ('full_name', 'address_1', 'address_2', 'city', 'state', 'zipcode')      
 
 class BuyForm(forms.ModelForm):
+   
+    def __init__(self, *args, **kwargs):
+       super(BuyForm, self).__init__(*args, **kwargs)
+       self.fields['suggested_price'].widget.attrs['readonly'] = True
+
     class Meta:
         model = Transaction
         fields = ('gallons_requested', 'delivery_address', 'delivery_date', 'suggested_price', 'total_amount_due')
