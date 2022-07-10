@@ -11,7 +11,7 @@ class Transaction(models.Model):
     Transaction model
     """        
     # Amount being purchased
-    amount = models.FloatField()
+    gallons_requested = models.FloatField()
     # Location where transaction occurred, true if in state, false if out of state.
     location = models.CharField(max_length=100)    
     # Date and time of desired delivery
