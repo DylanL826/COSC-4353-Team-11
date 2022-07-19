@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\sd_app",
+    "\\sd_app\\templates",
+    "\\sd_app\\templates\\sd_app"
   ],
+  "SelectedNode": "\\sd_app\\views.py",
   "PreviewInSolutionExplorer": false
 }
