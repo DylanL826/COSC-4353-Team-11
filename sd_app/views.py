@@ -1,3 +1,4 @@
+from turtle import pu
 from django.shortcuts import render, redirect
 
 
@@ -39,6 +40,15 @@ def profilePage(request):
     purchases = Transaction.objects.filter(user=request.user)
     context = {'profile_form': profile_form, 'purchases': purchases}    
     return render(request, 'sd_app/profile.html', context)    
+
+@login_required
+def historyPage(request):
+    '''Display transaction history of User'''
+    purchases = Transaction.objects.filter(user=request.user)
+    context = {'purchases': purchases}
+    # print("\n\t\tHistory page rendered\n")
+    # print(context['purchases'][0].location,"\n")
+    return render(request, 'sd_app/history.html', context)
 
 def registerPage(request):
     # '''Prompt user to register, after registering redirect to login page'''

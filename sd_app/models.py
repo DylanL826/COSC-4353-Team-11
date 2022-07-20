@@ -19,8 +19,8 @@ class Transaction(models.Model):
     # User who made the transaction
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return "Amount: " + str(self.amount) + " gal. Location: at " + str(self.location) + ". Delivery Date: " + str(self.delivery_date)
+    # def __str__(self):
+    #     return "Amount: " + str(self.amount) + " gal. Location: at " + str(self.location) + ". Delivery Date: " + str(self.delivery_date)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
