@@ -85,6 +85,12 @@ def buyPage(request):
     context = {'buy_form': form}
     return render(request, 'sd_app/buy.html', context)
 
+@login_required
+def purchaseHistoryPage(request):
+    purchases = Transaction.objects.filter(user=request.user)
+    context = {'purchases': purchases}    
+    return render(request, 'sd_app/purchase_history.html', context)    
+
 #def buyPageCalculation(request):
     '''Calculate total price of transaction'''
     if request.method == 'POST':
