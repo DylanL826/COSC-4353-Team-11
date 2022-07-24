@@ -103,6 +103,7 @@ env/
 venv/ 
 ENV/ 
 sd_env/
+project_env/
 env.bak/ 
 venv.bak/ 
 
