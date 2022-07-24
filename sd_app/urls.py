@@ -11,5 +11,6 @@ urlpatterns = [
     path('profile/', views.profilePage, name = 'profile'),
     path('buy/', views.buyPage, name='buy'),
     path("register/", views.registerPage, name="register"),
-    path("history", views.historyPage, name="history"),
+    path('purchase_history/', views.purchaseHistoryPage, name='purchase_history'),
+
     ]
