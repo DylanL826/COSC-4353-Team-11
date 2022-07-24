@@ -41,7 +41,7 @@ TESTING INSTRUCTIONS
 
 Coverage instructions:
 
-Pip3 install coverage
+pip3 install coverage
 
 coverage --version
 
