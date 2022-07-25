@@ -21,19 +21,27 @@
     <table border="1">
         <tr>
             <td>Gallons Requested </td>
-            <td>Delivery Address </td>
             <td>Delivery Date </td>
             <td>Suggested Price </td>
             <td>Total Amount</td>
+            <td>Address 1</td>
+            <td>Address 2</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Zipcode</td>
 
         </tr>
         {% for item in purchases %}
         <tr>
             <td>{{ item.gallons_requested }}</td>
-            <td>{{ item.delivery_address }}</td>
             <td>{{ item.delivery_date }}</td>
             <td>{{ item.suggested_price }}</td>
             <td> $ {{ item.total_amount_due }}</td>
+            <td> {{ address_1 }}</td>
+            <td> {{ address_2 }}</td>
+            <td> {{ city }}</td>
+            <td> {{ state }}</td>
+            <td> {{ zipcode }}</td>
 
         </tr>
         {% endfor %}

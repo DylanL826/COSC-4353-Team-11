@@ -8,7 +8,7 @@ from django.contrib import messages
 
 from .forms import NewUserForm, ProfileForm, BuyForm
 
-from .models import Transaction
+from .models import Transaction, UserProfile
 
 class PricingModule:
     pass
@@ -82,14 +82,16 @@ def buyPage(request):
             new_purchase.save()
             return redirect('sd_app:buy')
         print("\t\tbuyPage: Form is invalid\n")
-    context = {'buy_form': form}
+    addressItems = UserProfile.objects.filter(user=request.user)
+    context = {'buy_form': form, 'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode}
     return render(request, 'sd_app/buy.html', context)
 
 @login_required
 def purchaseHistoryPage(request):
     purchases = Transaction.objects.filter(user=request.user)
-    context = {'purchases': purchases}    
-    return render(request, 'sd_app/purchase_history.html', context)    
+    addressItems = UserProfile.objects.filter(user=request.user)
+    context = {'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode, 'purchases': purchases}    
+    return render(request, 'sd_app/purchase_history.html', context)
 
 #def buyPageCalculation(request):
     '''Calculate total price of transaction'''

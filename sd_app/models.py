@@ -13,8 +13,6 @@ class Transaction(models.Model):
     """        
     # Amount being purchased
     gallons_requested = models.FloatField()
-    # Location where transaction occurred, true if in state, false if out of state.
-    delivery_address = models.CharField(max_length=35, default='PROFILE ADDRESS')
     # Date and time of desired delivery
     delivery_date = models.CharField(max_length=15)
     # User who made the transaction
@@ -23,7 +21,7 @@ class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Gallons requested: " + str(self.gallons_requested) + " gal. Delivery Address: " + str(self.delivery_address) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
+        return "Gallons requested: " + str(self.gallons_requested) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
 
 STATE_CHOICES = (
     ('al','AL'),

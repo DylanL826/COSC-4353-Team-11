@@ -1,14 +1,14 @@
 {% extends "sd_app/base.html" %}
     
-    {% block content %}
-    <h2> Fuel Quote Form</h2>
-    <body>        
-        <form method="POST" action="{% url 'sd_app:buy' %}">
-            {% csrf_token %}
-            {{ buy_form.as_p }}
-            <button type="submit">Submit</button>
-
-        </form>
-    </body>
-        
-    {% endblock content %}
+{% block content %}
+<h2> Fuel Quote Form</h2>
+<body>  
+    <form method="POST" action="{% url 'sd_app:buy' %}">
+        {% csrf_token %}
+        {{ buy_form.as_p }}
+        <p>Delivery Address: {{ address_1 }}, {{ address_2 }}, {{ city }}, {{ state }} {{ zipcode }} </p>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+    
+{% endblock content %}
