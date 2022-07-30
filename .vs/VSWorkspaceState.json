@@ -3,8 +3,9 @@
     "",
     "\\sd_app",
     "\\sd_app\\templates",
-    "\\sd_app\\templates\\sd_app"
+    "\\sd_app\\templates\\sd_app",
+    "\\sd_app\\tests"
   ],
-  "SelectedNode": "\\sd_app\\views.py",
+  "SelectedNode": "\\sd_app\\forms.py",
   "PreviewInSolutionExplorer": false
 }
