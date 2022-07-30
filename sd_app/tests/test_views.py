@@ -41,6 +41,9 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
         self.assertTemplateUsed(response, 'sd_app/purchase_hisotry.html')
     
-   
+    def test_calculate_price(self):
+        price = 1.695
+        self.assertEqual(priceModel('tx', 1, 1500), price)
+
     
     

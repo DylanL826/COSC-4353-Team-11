@@ -140,3 +140,4 @@ def priceModel(location, history, gallons_requested):
     margin = (location_rate - history_rate + gallons_requested_rate + company_profit_rate) * 1.50
     price = margin + 1.50
     return price
+
