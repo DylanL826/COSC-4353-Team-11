@@ -69,10 +69,10 @@ def buyPage(request):
     Display total price of transaction.
     Link to logout.'''
     if request.method != 'POST': 
-        print("\t\tbuyPage: GET request received\n")
+        #print("\t\tbuyPage: GET request received\n")
         form = BuyForm()
     else: # POST
-        print("\t\tbuyPage: POST request received\n")
+        #print("\t\tbuyPage: POST request received\n")
         form = BuyForm(data=request.POST)
         if form.is_valid():
             print("\t\tbuyPage: Form is valid\n")
