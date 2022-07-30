@@ -24,18 +24,18 @@ def profilePage(request):
     ''' Display user profile information and allow them to update profile information.
         Display transaction history of User.'''    
     if request.method == 'POST': # Form has been submitted
-        print("\t\tPOST request received\n")
+        #print("\t\tPOST request received\n")
         #user_form = NewUserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
         if profile_form.is_valid():
-            print("\t\tForms are valid\n")
+            #print("\t\tForms are valid\n")
             #user_form.save()
             profile_form.save()            
             return redirect('sd_app:profile')
         else:
             print("\t\tForms are invalid\n")
     else: # GET request, display current information
-        print("\t\tGET request received\n") 
+        #print("\t\tGET request received\n") 
         profile_form = ProfileForm(instance=request.user.userprofile)
     context = {'profile_form': profile_form}    
     return render(request, 'sd_app/profile.html', context)    
@@ -68,28 +68,28 @@ def buyPage(request):
     Link to logout.'''
     addressItems = UserProfile.objects.filter(user=request.user)
     if request.method != 'POST': 
-        print("\t\tbuyPage: GET request received\n")
+        #print("\t\tbuyPage: GET request received\n")
         form = BuyForm()
         price = 0.0
         total_amount = 0.00
     elif 'submit' in request.POST: # POST
-        print("\t\tbuyPage: POST request received\n")
+        #print("\t\tbuyPage: POST request received\n")
         form = BuyForm(data=request.POST)
         if form.is_valid():
-            print("\t\tbuyPage: Form is valid\n")
+            #print("\t\tbuyPage: Form is valid\n")
             #form.initial['user_id'] = request.user.id
             new_purchase = form.save(commit=False)
             new_purchase.user = request.user
             #calculate the price and total amount
-            amount = int(request.POST['gallons_requested'])
-            location = addressItems[0].state
+            #amount = int(request.POST['gallons_requested'])
+            #location = addressItems[0].state
             count = Transaction.objects.filter(user=request.user).count()
             if count != 0:
                 history = 1
             else:
                 history = 0
-            price = priceModel(location, history, amount)
-            total_amount = price * amount
+            price = priceModel(addressItems[0].state, history, int(request.POST['gallons_requested']))
+            total_amount = price * int(request.POST['gallons_requested'])
             #save the data to database
             new_purchase.address_1 = addressItems[0].address_1
             new_purchase.address_2 = addressItems[0].address_2
@@ -100,19 +100,19 @@ def buyPage(request):
             new_purchase.total_amount_due = total_amount
             new_purchase.save()
             #return redirect('sd_app:buy')
-        print("\t\tbuyPage: Form is invalid\n")
+        #print("\t\tbuyPage: Form is invalid\n")
 
     elif 'quotet' in request.POST:
         form = BuyForm(data=request.POST)
-        amount = int(request.POST['gallons_requested'])
-        location = addressItems[0].state
+        #amount = int(request.POST['gallons_requested'])
+        #location = addressItems[0].state
         count = Transaction.objects.filter(user=request.user).count()
         if count != 0:
             history = 1
         else:
             history = 0
-        price = priceModel(location, history, amount)
-        total_amount = price * amount
+        price = priceModel(addressItems[0].state, history, int(request.POST['gallons_requested']))
+        total_amount = price * int(request.POST['gallons_requested'])
 
     context = {'price':price, 'total_amount':total_amount, 'buy_form': form, 'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode}
     return render(request, 'sd_app/buy.html', context)
@@ -120,8 +120,8 @@ def buyPage(request):
 @login_required
 def purchaseHistoryPage(request):
     purchases = Transaction.objects.filter(user=request.user)
-    context = {'purchases': purchases}    
-    return render(request, 'sd_app/purchase_history.html', context)
+    #context = {'purchases': purchases}    
+    return render(request, 'sd_app/purchase_history.html', {'purchases': purchases})
 
 def priceModel(location, history, gallons_requested):
     if location=="tx":
