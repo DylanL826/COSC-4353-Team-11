@@ -1,12 +1,25 @@
 {% extends "sd_app/base.html" %}
     
 {% block content %}
+<script>
+    function calculate(){
+        // var price = document.getElementById("price").value;
+        // var quantity = document.getElementById("quantity").value;
+        // var total = price * quantity;
+        // document.getElementById("total").value = total;
+        //document.write("quantity: " + quantity + "<br>" + "price: " + price + "<br>" + "total: " + (quantity * price));        
+        document.write("calculate called");        
+    }
+</script>
 <h2> Fuel Quote Form</h2>
 <body>  
     <form method="POST" action="{% url 'sd_app:buy' %}">
         {% csrf_token %}
         {{ buy_form.as_p }}
         <p>Delivery Address: {{ address_1 }}, {{ address_2 }}, {{ city }}, {{ state }} {{ zipcode }} </p>
+        <button type="button" onclick="calculate()">Get Quote</button>
+    </br>
+    </br>
         <button type="submit">Submit</button>
     </form>
 </body>
