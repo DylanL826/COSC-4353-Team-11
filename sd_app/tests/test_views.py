@@ -3,7 +3,7 @@ from urllib import response
 from django.urls import reverse
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-from sd_app.views import profilePage, buyPage, registerPage, purchaseHistoryPage
+from sd_app.views import profilePage, buyPage, registerPage, purchaseHistoryPage, priceModel
 from sd_app.models import UserProfile, Transaction
 from django.contrib.auth.models import User
 
@@ -41,6 +41,9 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)
         self.assertTemplateUsed(response, 'sd_app/purchase_hisotry.html')
     
-    #
+    def test_calculate_price(self):
+        price = 1.695
+        self.assertEqual(priceModel('tx', 1, 1500), price)
+
     
     

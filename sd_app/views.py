@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 
-
 from django.views.generic import TemplateView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -25,21 +24,20 @@ def profilePage(request):
     ''' Display user profile information and allow them to update profile information.
         Display transaction history of User.'''    
     if request.method == 'POST': # Form has been submitted
-        print("\t\tPOST request received\n")
+        #print("\t\tPOST request received\n")
         #user_form = NewUserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
         if profile_form.is_valid():
-            print("\t\tForms are valid\n")
+            #print("\t\tForms are valid\n")
             #user_form.save()
             profile_form.save()            
             return redirect('sd_app:profile')
         else:
             print("\t\tForms are invalid\n")
     else: # GET request, display current information
-        print("\t\tGET request received\n") 
+        #print("\t\tGET request received\n") 
         profile_form = ProfileForm(instance=request.user.userprofile)
-    purchases = Transaction.objects.filter(user=request.user)
-    context = {'profile_form': profile_form, 'purchases': purchases}    
+    context = {'profile_form': profile_form}    
     return render(request, 'sd_app/profile.html', context)    
 
 def registerPage(request):
@@ -68,56 +66,82 @@ def buyPage(request):
     '''Prompt user to buy, after buying refresh page.
     Display total price of transaction.
     Link to logout.'''
+    addressItems = UserProfile.objects.filter(user=request.user)
     if request.method != 'POST': 
         #print("\t\tbuyPage: GET request received\n")
         form = BuyForm()
+<<<<<<< HEAD
     else: # POST
+=======
+        price = 0.0
+        total_amount = 0.00
+    elif 'submit' in request.POST: # POST
+>>>>>>> 42822fcb5d0dbc4438f3d2bdce08562d02b2e9e2
         #print("\t\tbuyPage: POST request received\n")
         form = BuyForm(data=request.POST)
         if form.is_valid():
-            print("\t\tbuyPage: Form is valid\n")
+            #print("\t\tbuyPage: Form is valid\n")
             #form.initial['user_id'] = request.user.id
             new_purchase = form.save(commit=False)
             new_purchase.user = request.user
+            #calculate the price and total amount
+            #amount = int(request.POST['gallons_requested'])
+            #location = addressItems[0].state
+            count = Transaction.objects.filter(user=request.user).count()
+            if count != 0:
+                history = 1
+            else:
+                history = 0
+            price = priceModel(addressItems[0].state, history, int(request.POST['gallons_requested']))
+            total_amount = price * int(request.POST['gallons_requested'])
+            #save the data to database
+            new_purchase.address_1 = addressItems[0].address_1
+            new_purchase.address_2 = addressItems[0].address_2
+            new_purchase.city = addressItems[0].city
+            new_purchase.state = addressItems[0].state
+            new_purchase.zipcode = addressItems[0].zipcode
+            new_purchase.suggested_price = price
+            new_purchase.total_amount_due = total_amount
             new_purchase.save()
-            return redirect('sd_app:buy')
-        print("\t\tbuyPage: Form is invalid\n")
-    addressItems = UserProfile.objects.filter(user=request.user)
-    context = {'buy_form': form, 'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode}
+            #return redirect('sd_app:buy')
+        #print("\t\tbuyPage: Form is invalid\n")
+
+    elif 'quotet' in request.POST:
+        form = BuyForm(data=request.POST)
+        #amount = int(request.POST['gallons_requested'])
+        #location = addressItems[0].state
+        count = Transaction.objects.filter(user=request.user).count()
+        if count != 0:
+            history = 1
+        else:
+            history = 0
+        price = priceModel(addressItems[0].state, history, int(request.POST['gallons_requested']))
+        total_amount = price * int(request.POST['gallons_requested'])
+
+    context = {'price':price, 'total_amount':total_amount, 'buy_form': form, 'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode}
     return render(request, 'sd_app/buy.html', context)
 
 @login_required
 def purchaseHistoryPage(request):
     purchases = Transaction.objects.filter(user=request.user)
-    addressItems = UserProfile.objects.filter(user=request.user)
-    context = {'address_1' : addressItems[0].address_1, 'address_2' : addressItems[0].address_2, 'city' : addressItems[0].city, 'state' : addressItems[0].state, 'zipcode' : addressItems[0].zipcode, 'purchases': purchases}    
-    return render(request, 'sd_app/purchase_history.html', context)
+    #context = {'purchases': purchases}    
+    return render(request, 'sd_app/purchase_history.html', {'purchases': purchases})
 
-#def buyPageCalculation(request):
-    '''Calculate total price of transaction'''
-    if request.method == 'POST':
-        quantity = request.POST['quantity']
-        price = request.POST['price']
-        total = float(quantity) * float(price)
-        request.session['total'] = total # store total in session
-        return redirect(request, 'buy.html', {'total': total})
-
-#def transactionPage(request):
-
-'''def priceModel(location, history, gallons_requested):
-    if location=="TX":
+def priceModel(location, history, gallons_requested):
+    if location=="tx":
         location_rate = 0.02
     else:
         location_rate = 0.04
-    if history:
+    if history ==1:
         history_rate = 0.01
     else:
         history_rate = 0
-    if gallons_requested > 1000:
+    if gallons_requested >= 1000:
         gallons_requested_rate = 0.02
     else:
         gallons_requested_rate = 0.03
     company_profit_rate = 0.1
     margin = (location_rate - history_rate + gallons_requested_rate + company_profit_rate) * 1.50
     price = margin + 1.50
-    return price'''
+    return price
+

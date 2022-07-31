@@ -16,9 +16,16 @@ class Transaction(models.Model):
     # Date and time of desired delivery
     delivery_date = models.CharField(max_length=15)
     # User who made the transaction
-    suggested_price = models.DecimalField(max_digits=10, decimal_places=2, default='4.56')
-    total_amount_due = models.DecimalField(max_digits=10, decimal_places=2, default='1234.00')
+    suggested_price = models.DecimalField(max_digits=10, decimal_places=2, default='1.50')
+    total_amount_due = models.DecimalField(max_digits=10, decimal_places=2, default='0.00')
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    address_1 = models.CharField(max_length=100, default='')
+    address_2 = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, default='')
+    state = models.CharField(max_length=2, default='')
+    zipcode = models.CharField(max_length=9, validators=[MinLengthValidator(5)], default='')
 
     def __str__(self):
         return "Gallons requested: " + str(self.gallons_requested) + ". Delivery Date: " + str(self.delivery_date) + ". Suggested price: " + str(self.suggested_price) + ". Total amount due: " + str(self.total_amount_due)
