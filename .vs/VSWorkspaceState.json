@@ -7,6 +7,6 @@
     "\\sd_app\\tests",
     "\\sd_project"
   ],
-  "SelectedNode": "\\sd_project\\settings.py",
+  "SelectedNode": "\\sd_app\\tests\\test_views.py",
   "PreviewInSolutionExplorer": false
 }

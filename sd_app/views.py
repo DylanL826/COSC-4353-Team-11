@@ -70,13 +70,13 @@ def buyPage(request):
     if request.method != 'POST': 
         #print("\t\tbuyPage: GET request received\n")
         form = BuyForm()
-<<<<<<< HEAD
-    else: # POST
-=======
         price = 0.0
         total_amount = 0.00
+#<<<<<<< HEAD
+    
+#=======
     elif 'submit' in request.POST: # POST
->>>>>>> 42822fcb5d0dbc4438f3d2bdce08562d02b2e9e2
+#>>>>>>> 42822fcb5d0dbc4438f3d2bdce08562d02b2e9e2
         #print("\t\tbuyPage: POST request received\n")
         form = BuyForm(data=request.POST)
         if form.is_valid():
