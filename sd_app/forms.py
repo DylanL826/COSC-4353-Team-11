@@ -32,7 +32,6 @@ class ProfileForm(forms.ModelForm):
 class BuyForm(forms.ModelForm):
    
     
-    
     class Meta:
         model = Transaction
         fields = ('gallons_requested', 'delivery_date')
