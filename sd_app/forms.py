@@ -31,7 +31,12 @@ class ProfileForm(forms.ModelForm):
 
 class BuyForm(forms.ModelForm):
    
-    
+    def clean(self):
+        cleaned_data = super(BuyForm, self).clean()
+        delivery_date = cleaned_data['delivery_date']
+
+        return cleaned_data
+
     class Meta:
         model = Transaction
         fields = ('gallons_requested', 'delivery_date')
