@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -34,7 +35,14 @@ class BuyForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(BuyForm, self).clean()
         delivery_date = cleaned_data['delivery_date']
-
+        converted_date = datetime.datetime.strptime(delivery_date, '%Y-%m-%d').date()
+        print("today: ", datetime.date.today())
+        print("delivery_date: ", delivery_date)
+        print("converted_date: ", converted_date)
+        if converted_date < datetime.date.today():
+            print("Delivery date must be in the future.")
+        else:
+            print("valid date")
         return cleaned_data
 
     class Meta:
