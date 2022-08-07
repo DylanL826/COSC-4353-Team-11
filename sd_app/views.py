@@ -32,11 +32,9 @@ def profilePage(request):
             #user_form.save()
             profile_form.save()            
             return redirect('sd_app:profile')
-        else:
-            #print("\t\tForms are invalid\n")
     else: # GET request, display current information
-        #print("\t\tGET request received\n") 
         profile_form = ProfileForm(instance=request.user.userprofile)
+    #     print("\t\tGET request received\n") 
     context = {'profile_form': profile_form}    
     return render(request, 'sd_app/profile.html', context)    
 
@@ -109,10 +107,10 @@ def buyPage(request):
         form = BuyForm(data=request.POST)
         #amount = int(request.POST['gallons_requested'])
         #location = addressItems[0].state
-        if form.is_valid():
-            #print("\n\t\tbuyPage: GET QUOTE Form is valid\n")
-        else:
-            #print("\n\t\tbuyPage: GET QUOTE Form is invalid\n")
+        # if form.is_valid():
+        #     #print("\n\t\tbuyPage: GET QUOTE Form is valid\n")
+        # else:
+        #     #print("\n\t\tbuyPage: GET QUOTE Form is invalid\n")
         count = Transaction.objects.filter(user=request.user).count()
         if count != 0:
             history = 1
