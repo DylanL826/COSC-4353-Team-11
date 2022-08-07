@@ -36,13 +36,12 @@ class BuyForm(forms.ModelForm):
         cleaned_data = super(BuyForm, self).clean()
         delivery_date = cleaned_data['delivery_date']
         converted_date = datetime.datetime.strptime(delivery_date, '%Y-%m-%d').date()
-        print("today: ", datetime.date.today())
-        print("delivery_date: ", delivery_date)
-        print("converted_date: ", converted_date)
+        # print("today: ", datetime.date.today())
+        # print("delivery_date: ", delivery_date)
+        # print("converted_date: ", converted_date)
         if converted_date < datetime.date.today():
-            print("Delivery date must be in the future.")
-        else:
-            print("valid date")
+            raise forms.ValidationError("Delivery date must be in the future.")
+        
         return cleaned_data
 
     class Meta:
