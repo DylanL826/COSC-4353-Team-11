@@ -33,7 +33,7 @@ def profilePage(request):
             profile_form.save()            
             return redirect('sd_app:profile')
         else:
-            print("\t\tForms are invalid\n")
+            #print("\t\tForms are invalid\n")
     else: # GET request, display current information
         #print("\t\tGET request received\n") 
         profile_form = ProfileForm(instance=request.user.userprofile)
@@ -52,7 +52,7 @@ def registerPage(request):
         #print("\t\tPOST request received\n")
         form = NewUserForm(data=request.POST)
         if form.is_valid():
-            print("\t\tForm is valid\n")
+            #print("\t\tForm is valid\n")
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful." )
