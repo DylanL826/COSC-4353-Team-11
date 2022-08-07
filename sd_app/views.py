@@ -66,6 +66,8 @@ def buyPage(request):
     '''Prompt user to buy, after buying refresh page.
     Display total price of transaction.
     Link to logout.'''
+    price = 0.0
+    total_amount = 0.0
     addressItems = UserProfile.objects.filter(user=request.user)
     if request.method != 'POST': 
         #print("\t\tbuyPage: GET request received\n")
@@ -76,7 +78,7 @@ def buyPage(request):
         #print("\t\tbuyPage: POST request received\n")
         form = BuyForm(data=request.POST)
         if form.is_valid():
-            #print("\t\tbuyPage: Form is valid\n")
+            print("\n\t\tbuyPage Submit: Form is valid\n")
             #form.initial['user_id'] = request.user.id
             new_purchase = form.save(commit=False)
             new_purchase.user = request.user
@@ -100,12 +102,17 @@ def buyPage(request):
             new_purchase.total_amount_due = total_amount
             new_purchase.save()
             #return redirect('sd_app:buy')
-        #print("\t\tbuyPage: Form is invalid\n")
+        print("\n\t\tbuyPage Submit: Form is invalid\n")
 
     elif 'quotet' in request.POST:
+        print("\n\t\tbuyPage: GET QUOTE request received\n")
         form = BuyForm(data=request.POST)
         #amount = int(request.POST['gallons_requested'])
         #location = addressItems[0].state
+        if form.is_valid():
+            print("\n\t\tbuyPage: GET QUOTE Form is valid\n")
+        else:
+            print("\n\t\tbuyPage: GET QUOTE Form is invalid\n")
         count = Transaction.objects.filter(user=request.user).count()
         if count != 0:
             history = 1
